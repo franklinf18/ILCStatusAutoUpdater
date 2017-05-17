@@ -93,12 +93,6 @@ namespace ILC_Auto_Updater_Forms_App
                 driver.Manage().Window.Position = new System.Drawing.Point(-2000, 0);
                 managerintranetId = intranetId;
 
-                //PhantomJSOptions options = new PhantomJSOptions();
-                //options.AddAdditionalCapability("phantomjs.page.settings.customHeaders", "'Authorization': 'Basic '+btoa('"+intranetId+":"+password+"'");
-
-                //driver = new PhantomJSDriver(options);
-
-
                 WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60)); //you can play with the time integer  to wait for longer.
 
                 driver.Navigate().GoToUrl("https://w3.ibm.com/services/bicentral/protect/primaV2/prima.wss");
@@ -109,7 +103,7 @@ namespace ILC_Auto_Updater_Forms_App
                 alert.SetAuthenticationCredentials(intranetId, password);
                 alert.Accept();
 
-                
+
                 //WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(120)); //you can play with the time integer  to wait for longer.
                 //New code to remove if block of SLM. Will check for all span tags with innertext as My Employees and click on the matching span.
 
@@ -126,7 +120,7 @@ namespace ILC_Auto_Updater_Forms_App
                     {
                         driver.Close();
                         driver.Dispose();
-                        LogErrorText(intranetId+" needs to accept Terms and Conditions. Automation could not proceed.");
+                        LogErrorText(intranetId + " needs to accept Terms and Conditions. Automation could not proceed.");
                         return false;
                     }
 
@@ -135,9 +129,7 @@ namespace ILC_Auto_Updater_Forms_App
                     IList<IWebElement> spanElements = driver.FindElements(By.TagName("span"));
                     for (int i = 1; i < spanElements.Count; i++)
                     {
-                        //System.out.println("*********************************************");
-                        //System.out.println(divElements.get(i).getText());
-                        //Console.WriteLine(divElements[i].GetAttribute("title"));
+
                         if (spanElements[i].GetAttribute("innerHTML").Equals("My Employees"))
                         {
                             spanElements[i].Click();
@@ -168,87 +160,6 @@ namespace ILC_Auto_Updater_Forms_App
                     }
                     throw;
                 }
-                
-
-                //if (intranetId == "santosh.balla@in.ibm.com")
-                //{
-                //    try
-                //    {
-                //        wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/div[4]/div[3]/div/div/div[1]/div[1]/div[3]/div/div[2]/div[5]/div[1]")));
-                //        driver.FindElement(By.XPath("/html/body/div[4]/div[3]/div/div/div[1]/div[1]/div[3]/div/div[2]/div[5]/div[1]")).Click();
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        Thread.Sleep(4000);
-                //        if (ex.Message.Contains("Modal dialog present"))
-                //        {
-                //            bool isElementPresent = IsElementPresent(By.XPath("/html/body/div[4]/div[2]/div/div/h1"));
-                //            if (isElementPresent)
-                //            {
-                //                bool isEmailSent = ValidateEmailSending(managerintranetId);
-                //                if (!isEmailSent)
-                //                {
-                //                    SendEmailINotes(managerintranetId);
-                //                    LogErrorText("Email Sent to " + managerintranetId);
-                //                    return false;
-                //                }
-                //            }
-
-                //        }
-                //        //throw;
-                //    }
-
-
-                //}
-                //else
-                //{
-                //    try
-                //    {
-                //        wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/div[4]/div[3]/div/div/div[1]/div[1]/div[3]/div/div[2]/div[4]/div[1]")));
-
-                //        driver.FindElement(By.XPath("/html/body/div[4]/div[3]/div/div/div[1]/div[1]/div[3]/div/div[2]/div[4]/div[1]")).Click();
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        Thread.Sleep(4000);
-
-                //        if (ex.Message.Contains("Modal dialog present"))
-                //        {
-                //            bool isElementPresent = IsElementPresent(By.XPath("/html/body/div[4]/div[2]/div/div/h1"));
-                //            if (isElementPresent)
-                //            {
-                //                bool isEmailSent = ValidateEmailSending(managerintranetId);
-                //                if (!isEmailSent)
-                //                {
-                //                    SendEmailINotes(managerintranetId);
-                //                    LogErrorText("Email Sent to " + managerintranetId);
-                //                    return false;
-                //                }
-                //            }
-
-
-                //        }
-                //        //throw;
-                //    }
-
-                //}
-
-
-
-                //IList<IWebElement> divElements = driver.FindElements(By.TagName("div"));
-
-                //for (int i = 1; i < divElements.Count; i++)
-                //{
-                //    //System.out.println("*********************************************");
-                //    //System.out.println(divElements.get(i).getText());
-                //    Console.WriteLine(divElements[i].GetAttribute("title"));
-                //    if (divElements[i].GetAttribute("title").Equals("/services/bicentral/protect/primaV2/prima.wss?page=myemployees&primaApp=Prima&"))
-                //    {
-                //        divElements[i].Click();
-                //        break;
-                //    }
-
-                //}
 
 
                 Console.WriteLine("Employee Div clicked!!!");
@@ -363,33 +274,8 @@ namespace ILC_Auto_Updater_Forms_App
 
                     totalEmployeesDefaulters = totalEmployeesDefaulters.Substring(0, indexOfCharNew - 3);
 
-                    //string wstData = "ILC is pending for " + totalEmployeesDefaulters + " users.";
 
-                    //int j = 9; // column no for defaulters count 
-                    //int k = 2; // column no for empId.
-                    //int l = 1; // column for empName
-                    //int m = 0; // counter for string array
-
-                    //string firstPart = "/html/body/div[4]/div[2]/div/div/div/table/tbody/tr[2]/td/table/tbody/tr[";
-                    //string secondPart = "]/td[";
-                    //string thirdPart = "]";
-                    //string empNameXpath = "";
-                    //string empIDXpath = "";
-
-
-                    //string[] empDefault = new string[2 * numOfRows];
-                    //empDefault[m] = wstData;
-
-
-
-                    //for (int i = 1; i < noOfRowsDelinquencyTable; i++)
-                    //{
-                    //    string finalXpath = firstPart + i + secondPart + j + thirdPart;
-                    //    string testValue = driver.FindElement(By.XPath(finalXpath)).Text;
-
-
-                    //}
-ExitIteration:
+                ExitIteration:
                     driver.Close();
                     driver.Dispose();
                     return true;
@@ -543,12 +429,6 @@ ExitIteration:
                     string value = ConfigurationManager.AppSettings[key];
                     if (value == "false")
                     {
-                        //config.AppSettings.Settings.Remove(key);
-                        //config.AppSettings.Settings.Add(key, "true");
-                        //config.Save(ConfigurationSaveMode.Modified);
-                        //ConfigurationManager.RefreshSection("appSettings");
-                        //Properties.Settings.Default.Reload();
-
                         return false;
                     }
                     else if (value == "true")
@@ -742,7 +622,7 @@ ExitIteration:
                     Console.WriteLine(encryptedPassword);
                     Console.WriteLine();
 
-                    if (encryptedPassword.Length>70)
+                    if (encryptedPassword.Length > 70)
                     {
                         string passwordNew = DecryptString(encryptedPassword);
                     }
@@ -771,7 +651,7 @@ ExitIteration:
             catch (Exception ex)
             {
                 LogError(ex);
-                
+
                 throw;
             }
 
@@ -780,7 +660,7 @@ ExitIteration:
         public void TestCredentialCopy()
         {
             string path = @"c:\users\ibm_admin\documents\visual studio 2015\Projects\ILC Auto Updater Web App\ILC Auto Updater Web App\Web.config";
-            CopyCredentialsFromWebConfig(path, "frfernan@in.ibm.com");
+            CopyCredentialsFromWebConfig(path, "");
         }
 
         public void UpdateCredentialsFromWebConfig()
@@ -894,8 +774,7 @@ ExitIteration:
 
         public void ProcessILCStatusUpdate()
         {
-            //string password2 = GetDecryptedPassword("sramboop@in.ibm.com");
-            //bool isSuccessful = AutoUpdateILCStatus("sramboop@in.ibm.com", password2);
+
             try
             {
                 if (managerIntranetIds != null)
@@ -903,9 +782,7 @@ ExitIteration:
 
                     foreach (string managerId in managerIntranetIds)
                     {
-                        //string password = GetDecryptedPassword(managerId);
-                        //string password2 = GetDecryptedPassword("sramboop@in.ibm.com");
-                        //bool isSuccessful = AutoUpdateILCStatus("sramboop@in.ibm.com", password2);
+
                         switch (managerId)
                         {
                             case "sedasari@in.ibm.com":
@@ -965,8 +842,7 @@ ExitIteration:
 
                         }
 
-                        //if (managerName == "Raju S Ramgiri")
-                        //{
+                        
                         string password2 = GetDecryptedPassword(managerId);
 
                         if (password2 != "Manager Information Not Found")
@@ -977,20 +853,6 @@ ExitIteration:
                                 ComputeUpdateValues(managerName);
                                 ResetEmailSendStatus(managerId);
                             }
-                            //if (managerId!="palpanja@in.ibm.com")
-                            //{
-                            //Commented ITSec Update part.
-                            //bool isSuccessfulITSec = TestLexicon(managerId, password2);
-                            //if (isSuccessfulITSec)
-                            //{
-                            //    if (completedCountITSec != -1)
-                            //    {
-                            //        ComputeUpdateValuesForITSec(managerName);
-                            //        ResetEmailSendStatus(managerId);
-                            //    }
-                            //}
-                            //}
-
 
                         }
 
@@ -1019,12 +881,6 @@ ExitIteration:
                 throw;
             }
 
-
-
-
-            //}
-
-            //ComputeUpdateValues("Sunder Ramboopalan");
 
         }
 
@@ -1297,7 +1153,7 @@ ExitIteration:
             try
             {
                 //managerName = "Sunder Ramboopalan"; //Comment this line
-                if (managerName=="Palas Panja")
+                if (managerName == "Palas Panja")
                 {
                     string updateQuery = "UPDATE " + tableNamePalas + " SET Reportees='" + totalEmployeesCount + "', Completed='" + totalCompletedCount + "', Comp='" + completedPercentage + "', Pending='" + totalDefaultersCount + "', Week='" + weekNo + "',TimeUpdated ='" + timeUpdated + "',status='" + completionStatus + "' WHERE ManagerName='" + managerName + "'";
                     DataSet ds = MySQLConnector(updateQuery);
@@ -1307,7 +1163,7 @@ ExitIteration:
                     string updateQuery = "UPDATE " + tableName + " SET Reportees='" + totalEmployeesCount + "', Completed='" + totalCompletedCount + "', Comp='" + completedPercentage + "', Pending='" + totalDefaultersCount + "', Week='" + weekNo + "',TimeUpdated ='" + timeUpdated + "',status='" + completionStatus + "' WHERE ManagerName='" + managerName + "'";
                     DataSet ds = MySQLConnector(updateQuery);
                 }
-                
+
                 //string updateQueryNew = "UPDATE agiletable SET Reportees='" + totalEmployeesCount + "'  WHERE ManagerName = '" + managerName + "'";
                 //DataSet dsNew = MySQLConnectorITSec(updateQueryNew);
             }
@@ -1322,9 +1178,7 @@ ExitIteration:
 
         public void UpdateITSecStatus(int totalEmployeesCount, int totalDefaultersCount, int totalCompletedCount)
         {
-            //managerName = "Sunder Ramboopalan"; //Comment this line
-            //string updateQuery = "UPDATE template SET Reportees='" + totalEmployeesCount + "', Completed='" + totalCompletedCount + "', Comp='" + completedPercentage + "', Pending='" + totalDefaultersCount + "', Week='" + weekNo + "',TimeUpdated ='" + timeUpdated + "',status='" + completionStatus + "' WHERE ManagerName='" + managerName + "'";
-            //DataSet ds = MySQLConnector(updateQuery);
+            
             string updateQueryNew = "UPDATE agiletable SET Reportees = '" + totalEmployeesCount + "', Completed = '" + totalCompletedCount + "', Completion = '" + completedPercentage + "', Pending = '" + totalDefaultersCount + "' WHERE ManagerName = '" + managerName + "'";
             DataSet dsNew = MySQLConnectorITSec(updateQueryNew);
 
@@ -2129,22 +1983,7 @@ ExitIteration:
                 //throw;
             }
 
-
-
-            //excelApp.DisplayAlerts = false;
-            //for (int i = excelApp.ActiveWorkbook.Worksheets.Count; i > 0; i--)
-            //{
-            //    Worksheet wkSheet = (Worksheet)excelApp.ActiveWorkbook.Worksheets[i];
-            //    wkSheet.Delete();
-            //    //if (wkSheet.Name == "NameOfSheetToDelete")
-            //    //{
-            //    //    wkSheet.Delete();
-            //    //}
-            //}
-            //excelApp.DisplayAlerts = true;
-
-
-
+                        
         }
 
         public bool IsFileLocked(FileInfo file)
